@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vuetify Table Example</title>
+  <title>Vuetify Birthday Wish Example</title>
   <!-- Vuetify CSS -->
   <link href="https://cdn.jsdelivr.net/npm/vuetify@2.5.10/dist/vuetify.min.css" rel="stylesheet">
   <!-- Vuetify Icons -->
@@ -14,25 +14,26 @@
   <div id="app">
     <v-app>
       <v-container>
-        <v-data-table
-          :headers="headers"
-          :items="items"
-          class="elevation-1"
-        >
-          <template v-slot:top>
-            <v-toolbar flat>
-              <v-toolbar-title>Vuetify Table</v-toolbar-title>
-              <v-divider class="mx-4" inset vertical></v-divider>
+        <!-- Form with Text Field and Submit Button -->
+        <v-form @submit.prevent="showDialog">
+          <v-text-field
+            v-model="name"
+            label="Enter your name"
+            required
+          ></v-text-field>
+          <v-btn type="submit" color="primary">Submit</v-btn>
+        </v-form>
+
+        <!-- Vuetify Dialog -->
+        <v-dialog v-model="dialog" max-width="400">
+          <v-card>
+            <v-card-title class="headline">{{ birthdayMessage }}</v-card-title>
+            <v-card-actions>
               <v-spacer></v-spacer>
-              <v-text-field
-                v-model="search"
-                label="Search"
-                single-line
-                hide-details
-              ></v-text-field>
-            </v-toolbar>
-          </template>
-        </v-data-table>
+              <v-btn color="green darken-1" text @click="dialog = false">Close</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-container>
     </v-app>
   </div>
@@ -47,18 +48,21 @@
       el: '#app',
       vuetify: new Vuetify(),
       data: () => ({
-        search: '',
-        headers: [
-          { text: 'Name', value: 'name' },
-          { text: 'Age', value: 'age' },
-          { text: 'Country', value: 'country' },
-        ],
-        items: [
-          { name: 'Akash', age: 30, country: 'USA' },
-          { name: 'Jane', age: 25, country: 'Canada' },
-          { name: 'Paul', age: 35, country: 'UK' },
-        ],
+        name: '',
+        dialog: false,
       }),
+      computed: {
+        birthdayMessage() {
+          return `🎂 Happy Birthday, ${this.name}! 🎉`;
+        }
+      },
+      methods: {
+        showDialog() {
+          if (this.name.trim() !== '') {
+            this.dialog = true;
+          }
+        }
+      }
     });
   </script>
   
