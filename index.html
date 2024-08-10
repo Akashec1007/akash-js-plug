@@ -145,7 +145,7 @@
           v => !!v || 'Email is required',
           v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
         ],
-      githubToken: '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', // Replace with your GitHub token
+      githubToken: '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', // Replace with your GitHub token
       repoOwner: 'Akashec1007',
       repoName: 'akash-js-plug',
       filePath: 'DB/UserDB.txt', // Path to the file in your GitHub repo
@@ -186,7 +186,7 @@
         `https://api.github.com/repos/${this.repoOwner}/${this.repoName}/${this.filePath}`,
         {
           headers: {
-            Authorization: `Bearer ${this.githubToken}`,
+            Authorization: `token ${this.githubToken}`,
             'Content-Type': 'application/json',
           },
         }
@@ -209,7 +209,7 @@
         {
           method: 'PUT',
           headers: {
-            Authorization: `Bearer ${this.githubToken}`,
+            Authorization: `token ${this.githubToken}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
