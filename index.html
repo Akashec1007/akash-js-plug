@@ -145,7 +145,7 @@
           v => !!v || 'Email is required',
           v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
         ],
-      githubToken: 'process.env.VUE_APP_GITHUB_TOKEN', // Replace with your GitHub token
+      githubToken: process.env.VUE_APP_GITHUB_TOKEN, // Replace with your GitHub token
       repoOwner: 'Akashec1007',
       repoName: 'akash-js-plug',
       filePath: 'DB/UserDB.txt', // Path to the file in your GitHub repo
