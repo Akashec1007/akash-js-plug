@@ -183,7 +183,7 @@
 
     async getFileContent() {
       const response = await fetch(
-        `https://api.github.com/repos/${this.repoOwner}/${this.repoName}/contents/${this.filePath}`,
+        `https://api.github.com/repos/${this.repoOwner}/${this.repoName}/${this.filePath}`,
         {
           headers: {
             Authorization: `token ${this.githubToken}`,
