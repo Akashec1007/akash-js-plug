@@ -186,7 +186,8 @@
         `https://api.github.com/repos/${this.repoOwner}/${this.repoName}/${this.filePath}`,
         {
           headers: {
-            Authorization: `token ${this.githubToken}`,
+            Authorization: `Bearer Token ${this.githubToken}`,
+            'Content-Type': 'application/json',
           },
         }
       );
@@ -208,7 +209,7 @@
         {
           method: 'PUT',
           headers: {
-            Authorization: `token ${this.githubToken}`,
+            Authorization: `Bearer Token ${this.githubToken}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
