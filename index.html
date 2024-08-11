@@ -171,6 +171,7 @@
         try {
           // Get the existing file content and SHA
           const fileData = await this.getFileContent();
+          console.log("fileData=============>"+fileData.content);
           const updatedContent =
             fileData.content + btoa(newEntry); // Append new entry (encoded in base64)
 
