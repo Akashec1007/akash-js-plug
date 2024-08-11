@@ -66,8 +66,11 @@
           </v-card>
         </v-dialog>
         <v-btn color="primary" @click="loadFileContent">Load File Content</v-btn>
-        <v-data-table :headers="headers" :items="tableItems" item-key="email" class="elevation-1">
-        </v-data-table>
+        <v-dialog v-model="displayUsers" max-width="400">
+        <v-data-table :headers="headers" :items="tableItems" item-key="email" class="elevation-1"></v-data-table>
+        <v-spacer></v-spacer>
+        <v-btn color="green darken-1" text @click="displayUsers = false">Close</v-btn>
+        </v-dialog>
         <v-divider class="my-4"></v-divider>
         <v-card>
           <v-card-title class="headline">About the Developer</v-card-title>
@@ -89,6 +92,7 @@
       data: () => ({
         name: '',
         dialog: false,
+        displayUsers:false,
         headers: [
           { text: 'Name', value: 'name' },
           { text: 'Phone', value: 'phone' },
@@ -149,6 +153,7 @@
       return new TextDecoder('utf-8').decode(bytes);
     },
     async loadFileContent() {
+          this.displayUsers = true;
           try {
             const fileData = await this.getFileContent();
             this.tableItems = this.parseData(this.base64ToString(fileData.content));
