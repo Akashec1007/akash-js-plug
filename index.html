@@ -4,63 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Birthday Wish</title>
-  <!-- Vuetify CSS -->
   <link href="https://cdn.jsdelivr.net/npm/vuetify@2.5.10/dist/vuetify.min.css" rel="stylesheet">
-  <!-- Vuetify Icons -->
   <link href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
 </head>
 <body>
-
   <div id="app">
     <v-app>
       <template>
         <v-container>
           <v-form ref="form" v-model="valid" lazy-validation>
-            <!-- Name Field -->
-            <v-text-field
-              v-model="name"
-              label="Name"
-              :rules="nameRules"
-              required
-            ></v-text-field>
-            <!-- Contact No Field -->
-            <v-text-field
-              v-model="contactNo"
-              label="Contact No"
-              :rules="contactRules"
-              required
-            ></v-text-field>
-      
-            <!-- Email Address Field -->
-            <v-text-field
-              v-model="email"
-              label="Email Address"
-              :rules="emailRules"
-              required
-            ></v-text-field>
-      
-            <!-- Submit Button -->
-            <v-btn
-              :disabled="!valid"
-              color="primary"
-              @click="submitForm"
-            >
-              Submit
+            <v-text-field v-model="name" label="Name" :rules="nameRules" required></v-text-field>
+            <v-text-field v-model="contactNo" label="Contact No" :rules="contactRules" required></v-text-field>
+            <v-text-field v-model="email" label="Email Address" :rules="emailRules" required></v-text-field>
+             <v-btn :disabled="!valid" color="primary" @click="submitForm">Submit
             </v-btn>
           </v-form>
         </v-container>
       </template>
-
-
-      
       <v-container>
         <template>
           <v-container>
             <v-row>
               <v-col>
-                <v-btn color="primary" href="aFrame.html">
-                  Scratch page to anothet JS library
-                </v-btn>
+                <v-btn color="primary" href="aFrame.html">Scratch page to anothet JS library</v-btn>
               </v-col>
               <v-col>
                 <v-card>
@@ -75,7 +41,6 @@
                           <v-list-item-title>Image 1</v-list-item-title>
                         </v-list-item-content>
                       </v-list-item>
-                      <!-- Add more items as needed -->
                     </v-list>
                   </v-card-text>
                 </v-card>
@@ -83,8 +48,6 @@
             </v-row>
           </v-container>
         </template>
-        
-        <!-- Form with Text Field and Submit Button -->
         <v-form @submit.prevent="showDialog">
           <v-text-field
             v-model="name"
@@ -93,8 +56,6 @@
           ></v-text-field>
           <v-btn type="submit" color="primary">Submit</v-btn>
         </v-form>
-
-        <!-- Vuetify Dialog -->
         <v-dialog v-model="dialog" max-width="400">
           <v-card>
             <v-card-title class="headline">{{ birthdayMessage }}</v-card-title>
@@ -105,19 +66,8 @@
           </v-card>
         </v-dialog>
         <v-btn color="primary" @click="loadFileContent">Load File Content</v-btn>
-
-        <!-- Vuetify Data Table -->
-        <v-data-table
-          :headers="headers"
-          :items="tableItems"
-          item-key="email"
-          class="elevation-1"
-        >
+        <v-data-table :headers="headers" :items="tableItems" item-key="email" class="elevation-1">
         </v-data-table>
-
-
-
-        <!-- About Developer Section -->
         <v-divider class="my-4"></v-divider>
         <v-card>
           <v-card-title class="headline">About the Developer</v-card-title>
@@ -130,16 +80,12 @@
       </v-container>
     </v-app>
   </div>
-
-  <!-- Vue.js -->
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
-  <!-- Vuetify JS -->
   <script src="https://cdn.jsdelivr.net/npm/vuetify@2.5.10/dist/vuetify.js"></script>
-
   <script>
     new Vue({
-      el: '#app',
-      vuetify: new Vuetify(),
+        el: '#app',
+        vuetify: new Vuetify(),
       data: () => ({
         name: '',
         dialog: false,
@@ -162,13 +108,12 @@
           v => !!v || 'Email is required',
           v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
         ],
-      tokenPart0:'gh',
-      tokenPart1:'p_nKwvZS1E1giMCQDE',
-      tokenPart2:'nXjLh9HsvG6URd3ZTHTs',
-      //githubToken: tokenPart0+tokenPart1+tokenPart2, // Replace with your GitHub token
-      repoOwner: 'Akashec1007',
-      repoName: 'akash-js-plug',
-      filePath: 'DB/UserDB.txt', // Path to the file in your GitHub repo
+        tokenPart0:'gh',
+        tokenPart1:'p_nKwvZS1E1giMCQDE',
+        tokenPart2:'nXjLh9HsvG6URd3ZTHTs',
+        repoOwner: 'Akashec1007',
+        repoName: 'akash-js-plug',
+        filePath: 'DB/UserDB.txt',
       }),
     computed: {
         birthdayMessage() {
@@ -185,11 +130,8 @@
         if (this.$refs.form.validate()) {
           const newEntry = `${this.name},${this.contactNo},${this.email}\n`;
         try {
-          // Get the existing file content and SHA
           const fileData = await this.getFileContent();
-          //const updatedContent = fileData.content + btoa(newEntry); // Append new entry (encoded in base64)
           const updatedContent = fileData.content + newEntry;
-          // Update the file in the repository
           await this.updateFile(fileData.sha, updatedContent);
           alert('Form submitted successfully!');
         } catch (error) {
