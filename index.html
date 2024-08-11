@@ -180,7 +180,7 @@
       const data = await response.json();
       return {
         sha: data.sha,
-        content: data.content,
+        content: data.content, // Decode base64 to string
       };
     },
     async updateFile(sha, content) {
@@ -194,7 +194,7 @@
           },
           body: JSON.stringify({
             message: 'Update UserDB.txt with new form submission',
-            content: content, // Encode to base64
+            content: btoa(content), // Encode to base64
             sha: sha, // File SHA
           }),
         }
