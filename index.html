@@ -180,7 +180,7 @@
       const data = await response.json();
       return {
         sha: data.sha,
-        content: data.content, // Decode base64 to string
+        content: data.content,
       };
     },
     async updateFile(sha, content) {
