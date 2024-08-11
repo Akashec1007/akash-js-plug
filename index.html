@@ -201,6 +201,10 @@
     async loadFileContent() {
           try {
             const fileData = await this.getFileContent();
+            console.log(fileData);
+            console.log(JSON.stringify(fileData));
+            console.log(fileData.content);
+            console.log(JSON.stringify(fileData.content));
             this.tableItems = this.parseData(fileData.content);
           } catch (error) {
             console.error('Error loading file content:', error);
