@@ -198,14 +198,18 @@
         }
       }
     },
+    base64ToString(base64String) {
+      const binaryString = atob(base64String);
+      const bytes = new Uint8Array(binaryString.length);
+      for (let i = 0; i < binaryString.length; i++) {
+        bytes[i] = binaryString.charCodeAt(i);
+      }
+      return new TextDecoder('utf-8').decode(bytes);
+    },
     async loadFileContent() {
           try {
             const fileData = await this.getFileContent();
-            console.log(fileData);
-            console.log(JSON.stringify(fileData));
-            console.log(fileData.content);
-            console.log(JSON.stringify(fileData.content));
-            this.tableItems = this.parseData(fileData.content);
+            this.tableItems = this.parseData(base64ToString(fileData.content));
           } catch (error) {
             console.error('Error loading file content:', error);
             alert('Failed to load file content.');
