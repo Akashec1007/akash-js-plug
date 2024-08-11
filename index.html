@@ -131,7 +131,7 @@
           const newEntry = `${this.name},${this.contactNo},${this.email}\n`;
         try {
           const fileData = await this.getFileContent();
-          const updatedContent = fileData.content + newEntry;
+          const updatedContent = this.base64ToString(fileData.content) + newEntry;
           await this.updateFile(fileData.sha, updatedContent);
           alert('Form submitted successfully!');
         } catch (error) {
@@ -194,7 +194,7 @@
           },
           body: JSON.stringify({
             message: 'Update UserDB.txt with new form submission',
-            content: btoa(content), // Encode to base64
+            content: content, // Encode to base64
             sha: sha, // File SHA
           }),
         }
