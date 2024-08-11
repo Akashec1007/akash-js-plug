@@ -209,7 +209,7 @@
     async loadFileContent() {
           try {
             const fileData = await this.getFileContent();
-            this.tableItems = this.parseData(base64ToString(fileData.content));
+            this.tableItems = this.parseData(this.base64ToString(fileData.content));
           } catch (error) {
             console.error('Error loading file content:', error);
             alert('Failed to load file content.');
