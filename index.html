@@ -22,17 +22,6 @@
         </v-container>
       </template>
       <v-container>
-        <template>
-          <v-container>
-            <v-row>
-              <v-col>
-                <v-btn color="primary" href="aFrame.html">Scratch page to another JS library</v-btn>
-              </v-col>
-              <v-col>
-              </v-col>
-            </v-row>
-          </v-container>
-        </template>
         <v-btn color="primary" @click="loadFileContent">Check All Users Details</v-btn>
         <v-dialog v-model="displayUsers" max-width="800">
         <v-card>
@@ -50,6 +39,7 @@
             <p>Feel free to connect with me on <a href="https://www.linkedin.com/in/akash-srivastava-ec1007" target="_blank">LinkedIn</a> or check out my projects on <a href="https://github.com/Akashec1007/akash-js-plug" target="_blank">GitHub</a>.</p>
           </v-card-text>
         </v-card>
+        <v-btn color="primary" href="aFrame.html">Scratch page to another JS library</v-btn>
       </v-container>
     </v-app>
   </div>
@@ -63,7 +53,6 @@
         name: '',
         dialog: false,
         displayUsers:false,
-        dataInserted:true,
         headers: [
           { text: 'Name', value: 'name' },
           { text: 'Phone', value: 'phone' },
@@ -98,7 +87,7 @@
     },
     async submitForm() {
         if (this.$refs.form.validate()) {
-          const newEntry = `${this.name},${this.contactNo},${this.email},${this.dataInserted}\n`;
+          const newEntry = `${this.name},${this.contactNo},${this.email}\n`;
         try {
           const fileData = await this.getFileContent();
           const updatedContent = this.base64ToString(fileData.content) + newEntry;
