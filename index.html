@@ -114,11 +114,6 @@
           item-key="email"
           class="elevation-1"
         >
-          <template v-slot:items="data">
-            <td>{{ data.item.name }}</td>
-            <td>{{ data.item.phone }}</td>
-            <td>{{ data.item.email }}</td>
-          </template>
         </v-data-table>
 
 
@@ -188,7 +183,8 @@
           }
         },
         base64ToString(base64String) {
-          const binaryString = atob(base64String);
+          //const binaryString = atob(base64String);
+          const binaryString = base64String;
           const bytes = new Uint8Array(binaryString.length);
         for (let i = 0; i < binaryString.length; i++) {
           bytes[i] = binaryString.charCodeAt(i);
