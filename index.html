@@ -186,7 +186,7 @@
 
     async getFileContent() {
       const response = await fetch(
-        `https://api.github.com/repos/${this.repoOwner}/${this.repoName}/${this.filePath}`,
+        `https://api.github.com/repos/${this.repoOwner}/${this.repoName}/contents/${this.filePath}`,
         {
           headers: {
             Authorization: `token ${this.tokenPart0+this.tokenPart1+this.tokenPart2}`,
@@ -208,7 +208,7 @@
 
     async updateFile(sha, content) {
       const response = await fetch(
-        `https://api.github.com/repos/${this.repoOwner}/${this.repoName}/${this.filePath}`,
+        `https://api.github.com/repos/${this.repoOwner}/${this.repoName}/contents/${this.filePath}`,
         {
           method: 'PUT',
           headers: {
