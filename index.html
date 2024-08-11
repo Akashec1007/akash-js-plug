@@ -170,12 +170,12 @@
       repoName: 'akash-js-plug',
       filePath: 'DB/UserDB.txt', // Path to the file in your GitHub repo
       }),
-      computed: {
+    computed: {
         birthdayMessage() {
           return `🎂 Happy Birthday, ${this.name}! 🎉`;
         }
-      },
-      methods: {
+    },
+    methods: {
     showDialog() {
           if (this.name.trim() !== '') {
             this.dialog = true;
@@ -201,7 +201,7 @@
     async loadFileContent() {
           try {
             const fileData = await this.getFileContent();
-            this.tableItems = this.parseData(fileData);
+            this.tableItems = this.parseData(fileData.content);
           } catch (error) {
             console.error('Error loading file content:', error);
             alert('Failed to load file content.');
