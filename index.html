@@ -201,6 +201,7 @@
       }
 
       const data = await response.json();
+      console.log("data=======>0"+JSON.stringify(data.content));
       return {
         sha: data.sha,
         content: atob(data.content), // Decode base64 to string
